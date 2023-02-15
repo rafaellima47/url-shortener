@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
 
 const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
   _id: {
-    type: Buffer,
-    default: function() {
-      return Buffer.from(crypto.randomBytes(11)).toString("hex");;
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    default: mongoose.Types.ObjectId,
     required: true,
     unique: true,
-    maxlength: 11
   },
   shortenedString: {type: String, required: true, maxlength: 11},
   long: { type: String, required: true, maxlength: 2048 },

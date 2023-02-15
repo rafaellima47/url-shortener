@@ -29,7 +29,9 @@ class UrlRepository {
 
     static async insertOne(long){
         const hours = parseInt(process.env.URL_EXPIRATION_TIME_HOURS) || 24;
-        const shortnedString = crypto.randomBytes(11).toString('base64').slice(0, 11);
+        let shortnedString = crypto.randomBytes(11).toString('base64').slice(0, 11);
+        shortnedString = shortnedString.replaceAll("/", Math.floor(Math.random() * 10));
+        shortnedString = shortnedString.replaceAll("\\", Math.floor(Math.random() * 10));
 
         const newUrl = {
             shortenedString: shortnedString,
